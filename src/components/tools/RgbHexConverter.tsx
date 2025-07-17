@@ -1,12 +1,11 @@
-
 import React, { useState } from 'react';
 import { Button } from '../shared/Button';
 
 export const RgbHexConverter: React.FC = () => {
-  const [rgb, setRgb] = useState({ r: 255, g: 0, b: 0 });
-  const [hex, setHex] = useState('#FF0000');
-  const [rgbInput, setRgbInput] = useState('255, 0, 0');
+  const [rgbInput, setRgbInput] = useState('255,0,0');
   const [hexInput, setHexInput] = useState('#FF0000');
+  const [rgbResult, setRgbResult] = useState('255,0,0');
+  const [hexResult, setHexResult] = useState('#FF0000');
 
   const rgbToHex = () => {
     try {
@@ -19,10 +18,9 @@ export const RgbHexConverter: React.FC = () => {
         v.toString(16).padStart(2, '0').toUpperCase()
       ).join('');
       
-      setHex(hexValue);
-      setRgb({ r: values[0], g: values[1], b: values[2] });
+      setHexResult(hexValue);
     } catch {
-      setHex('Invalid RGB format');
+      setHexResult('Invalid RGB format');
     }
   };
 
@@ -37,47 +35,57 @@ export const RgbHexConverter: React.FC = () => {
       const g = parseInt(cleanHex.substr(2, 2), 16);
       const b = parseInt(cleanHex.substr(4, 2), 16);
       
-      setRgb({ r, g, b });
-      setRgbInput(`${r}, ${g}, ${b}`);
+      setRgbResult(`${r}, ${g}, ${b}`);
     } catch {
-      setRgbInput('Invalid HEX format');
+      setRgbResult('Invalid HEX format');
     }
   };
 
-  const currentColor = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  // Function to get current color for preview
+  const getCurrentColor = () => {
+    try {
+      const values = rgbInput.split(',').map(v => parseInt(v.trim()));
+      if (values.length === 3 && values.every(v => !isNaN(v) && v >= 0 && v <= 255)) {
+        return `rgb(${values[0]}, ${values[1]}, ${values[2]})`;
+      }
+    } catch {
+      // If parsing fails, return default red
+    }
+    return 'rgb(255, 0, 0)'; // Default red color
+  };
 
   return (
     <div className="space-y-6">
       <div className="text-center">
         <div 
-          className="w-32 h-32 rounded-xl border-4 border-white shadow-lg mx-auto mb-4"
-          style={{ backgroundColor: currentColor }}
+          className="w-32 rounded-xl border-4 border-border shadow-lg mx-auto mb-4"
+          style={{ backgroundColor: getCurrentColor() }}
         />
-        <p className="text-sm text-gray-600">Preview Color</p>
+        <p className="text-sm text-muted-foreground">Preview Color</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">RGB to HEX</h3>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="tool-label">
               RGB Values (r, g, b)
             </label>
             <input
               type="text"
               value={rgbInput}
               onChange={(e) => setRgbInput(e.target.value)}
-              className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="255, 0, 0"
+              className="tool-input"
+              placeholder="255,0,0"
             />
           </div>
           <Button onClick={rgbToHex}>Convert to HEX</Button>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="tool-label">
               HEX Result
             </label>
-            <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg font-mono">
-              {hex}
+            <div className="p-3 bg-secondary border border-border rounded-lg font-mono text-muted-foreground">
+              {hexResult}
             </div>
           </div>
         </div>
@@ -85,28 +93,28 @@ export const RgbHexConverter: React.FC = () => {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">HEX to RGB</h3>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="tool-label">
               HEX Value
             </label>
             <input
               type="text"
               value={hexInput}
               onChange={(e) => setHexInput(e.target.value)}
-              className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="tool-input"
               placeholder="#FF0000"
             />
           </div>
           <Button onClick={hexToRgb} variant="secondary">Convert to RGB</Button>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="tool-label">
               RGB Result
             </label>
-            <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg font-mono">
-              {rgbInput}
+            <div className="p-3 bg-secondary border border-border rounded-lg font-mono text-muted-foreground">
+              {rgbResult}
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}; 

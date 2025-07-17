@@ -26,7 +26,7 @@ export const FindReplace: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="tool-label">
           Input Text
         </label>
         <TextInput
@@ -38,26 +38,26 @@ export const FindReplace: React.FC = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="tool-label">
             Find
           </label>
           <input
             type="text"
             value={findText}
             onChange={(e) => setFindText(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             placeholder="Text to find"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="tool-label">
             Replace with
           </label>
           <input
             type="text"
             value={replaceText}
             onChange={(e) => setReplaceText(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             placeholder="Replacement text"
           />
         </div>
@@ -69,9 +69,9 @@ export const FindReplace: React.FC = () => {
           id="caseSensitive"
           checked={caseSensitive}
           onChange={(e) => setCaseSensitive(e.target.checked)}
-          className="mr-2"
+          className="tool-checkbox"
         />
-        <label htmlFor="caseSensitive" className="text-sm text-gray-700">
+        <label htmlFor="caseSensitive" className="text-sm text-foreground">
           Case sensitive
         </label>
       </div>
@@ -79,7 +79,7 @@ export const FindReplace: React.FC = () => {
       <Button onClick={findAndReplace}>Find & Replace</Button>
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="tool-label">
           Result
         </label>
         <OutputArea value={output} />

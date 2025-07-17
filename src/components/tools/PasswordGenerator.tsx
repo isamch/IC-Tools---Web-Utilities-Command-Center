@@ -48,27 +48,27 @@ export const PasswordGenerator: React.FC = () => {
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="tool-label">
             Password Length
           </label>
           <input
             type="number"
             value={length}
             onChange={(e) => setLength(Math.max(4, Math.min(100, Number(e.target.value))))}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             min="4"
             max="100"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="tool-label">
             Number of Passwords
           </label>
           <input
             type="number"
             value={count}
             onChange={(e) => setCount(Math.max(1, Math.min(20, Number(e.target.value))))}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             min="1"
             max="20"
           />
@@ -76,56 +76,56 @@ export const PasswordGenerator: React.FC = () => {
       </div>
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="tool-label">
           Character Types
         </label>
         <div className="grid grid-cols-2 gap-2">
-          <label className="flex items-center">
+          <label className="flex items-center text-foreground">
             <input
               type="checkbox"
               checked={options.uppercase}
               onChange={(e) => setOptions({...options, uppercase: e.target.checked})}
-              className="mr-2"
+              className="tool-checkbox"
             />
             Uppercase (A-Z)
           </label>
-          <label className="flex items-center">
+          <label className="flex items-center text-foreground">
             <input
               type="checkbox"
               checked={options.lowercase}
               onChange={(e) => setOptions({...options, lowercase: e.target.checked})}
-              className="mr-2"
+              className="tool-checkbox"
             />
             Lowercase (a-z)
           </label>
-          <label className="flex items-center">
+          <label className="flex items-center text-foreground">
             <input
               type="checkbox"
               checked={options.numbers}
               onChange={(e) => setOptions({...options, numbers: e.target.checked})}
-              className="mr-2"
+              className="tool-checkbox"
             />
             Numbers (0-9)
           </label>
-          <label className="flex items-center">
+          <label className="flex items-center text-foreground">
             <input
               type="checkbox"
               checked={options.symbols}
               onChange={(e) => setOptions({...options, symbols: e.target.checked})}
-              className="mr-2"
+              className="tool-checkbox"
             />
             Symbols (!@#$...)
           </label>
         </div>
         <div className="mt-2">
-          <label className="flex items-center">
+          <label className="flex items-center text-foreground">
             <input
               type="checkbox"
               checked={options.excludeSimilar}
               onChange={(e) => setOptions({...options, excludeSimilar: e.target.checked})}
-              className="mr-2"
+              className="tool-checkbox"
             />
-            Exclude similar characters (0, O, 1, l, I)
+            Exclude similar characters (0, O, 1l, I)
           </label>
         </div>
       </div>
@@ -137,7 +137,7 @@ export const PasswordGenerator: React.FC = () => {
       
       {passwords.length > 0 && (
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="tool-label">
             Generated Passwords
           </label>
           <OutputArea value={passwords.join('\n')} rows={Math.min(passwords.length + 2, 10)} />

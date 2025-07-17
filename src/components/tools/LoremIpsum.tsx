@@ -71,37 +71,37 @@ export const LoremIpsum: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="tool-label">
           Generate Type
         </label>
         <div className="flex gap-4">
-          <label className="flex items-center">
+          <label className="flex items-center text-foreground">
             <input
               type="radio"
               value="paragraphs"
               checked={type === 'paragraphs'}
-              onChange={(e) => setType(e.target.value as any)}
-              className="mr-2"
+              onChange={(e) => setType(e.target.value as 'paragraphs' | 'words' | 'sentences')}
+              className="tool-checkbox"
             />
             Paragraphs
           </label>
-          <label className="flex items-center">
+          <label className="flex items-center text-foreground">
             <input
               type="radio"
               value="words"
               checked={type === 'words'}
-              onChange={(e) => setType(e.target.value as any)}
-              className="mr-2"
+              onChange={(e) => setType(e.target.value as 'paragraphs' | 'words' | 'sentences')}
+              className="tool-checkbox"
             />
             Words
           </label>
-          <label className="flex items-center">
+          <label className="flex items-center text-foreground">
             <input
               type="radio"
               value="sentences"
               checked={type === 'sentences'}
-              onChange={(e) => setType(e.target.value as any)}
-              className="mr-2"
+              onChange={(e) => setType(e.target.value as 'paragraphs' | 'words' | 'sentences')}
+              className="tool-checkbox"
             />
             Sentences
           </label>
@@ -109,7 +109,7 @@ export const LoremIpsum: React.FC = () => {
       </div>
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="tool-label">
           {type === 'words' ? 'Number of Words' : `Number of ${type}`}
         </label>
         <input
@@ -123,7 +123,7 @@ export const LoremIpsum: React.FC = () => {
               setParagraphs(Math.max(1, Math.min(20, value)));
             }
           }}
-          className="w-32 p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-32 tool-input"
           min="1"
           max={type === 'words' ? 1000 : 20}
         />
@@ -133,7 +133,7 @@ export const LoremIpsum: React.FC = () => {
       
       {output && (
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="tool-label">
             Generated Text
           </label>
           <OutputArea value={output} rows={12} />

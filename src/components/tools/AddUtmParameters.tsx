@@ -36,7 +36,7 @@ export const AddUtmParameters: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="tool-label">
           URLs (one per line)
         </label>
         <TextInput
@@ -48,62 +48,62 @@ export const AddUtmParameters: React.FC = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            UTM Source
+          <label className="tool-label">
+            Campaign Source (utm_source)
           </label>
           <input
             type="text"
             value={utmSource}
             onChange={(e) => setUtmSource(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             placeholder="e.g., google"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            UTM Medium
+          <label className="tool-label">
+            Campaign Medium (utm_medium)
           </label>
           <input
             type="text"
             value={utmMedium}
             onChange={(e) => setUtmMedium(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             placeholder="e.g., cpc"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            UTM Campaign
+          <label className="tool-label">
+            Campaign Name (utm_campaign)
           </label>
           <input
             type="text"
             value={utmCampaign}
             onChange={(e) => setUtmCampaign(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             placeholder="e.g., spring_sale"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            UTM Term
+          <label className="tool-label">
+            Campaign Term (utm_term)
           </label>
           <input
             type="text"
             value={utmTerm}
             onChange={(e) => setUtmTerm(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             placeholder="e.g., running+shoes"
           />
         </div>
-        <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            UTM Content
+        <div>
+          <label className="tool-label">
+            Campaign Content (utm_content)
           </label>
           <input
             type="text"
             value={utmContent}
             onChange={(e) => setUtmContent(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="tool-input"
             placeholder="e.g., logolink"
           />
         </div>
@@ -112,7 +112,7 @@ export const AddUtmParameters: React.FC = () => {
       <Button onClick={addUtmParameters}>Add UTM Parameters</Button>
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="tool-label">
           URLs with UTM Parameters
         </label>
         <OutputArea value={output} />

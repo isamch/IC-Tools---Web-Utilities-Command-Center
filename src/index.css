@@ -106,6 +106,23 @@
   .status-warning { @apply bg-yellow-500; }
   .status-offline { @apply bg-red-500; }
   .status-secure { @apply bg-blue-500; }
+  /* Global input and textarea styling for dark theme */
+  input, textarea, select {
+    @apply text-foreground bg-input border-border;
+  }
+
+  input::placeholder, textarea::placeholder {
+    @apply text-muted-foreground;
+  }
+
+  /* Fix for form elements that might have white backgrounds */
+  input[type="text"], input[type="number"], input[type="email"], input[type="password"], input[type="url"], input[type="search"] {
+    @apply text-foreground bg-input border-border;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    @apply text-primary bg-input border-border;
+  }
 }
 
 @layer components {
@@ -125,5 +142,44 @@
     @apply text-foreground placeholder:text-muted-foreground;
     @apply focus:outline-none focus:ring-2 focus:ring-ring;
     @apply font-mono text-sm;
+    @apply text-foreground;
+  }
+
+  /* Additional input styling for tool components */
+  .tool-input {
+    @apply w-full p-3 border border-border rounded-lg;
+    @apply bg-input text-foreground;
+    @apply focus:ring-2 focus:ring-ring focus:border-transparent;
+    @apply placeholder:text-muted-foreground;
+  }
+
+  .tool-label {
+    @apply block text-sm font-medium text-foreground mb-2;
+  }
+
+  .tool-checkbox {
+    @apply mr-2 text-primary bg-input border-border;
+  }
+
+  /* Result display areas */
+  .result-display {
+    @apply p-3 bg-secondary border border-border rounded-lg font-mono text-muted-foreground;
+  }
+
+  /* Table styling for dark theme */
+  .tactical-table {
+    @apply bg-card border border-border rounded-xl overflow-hidden;
+  }
+
+  .tactical-table th {
+    @apply text-left p-4 font-medium text-foreground bg-secondary;
+  }
+
+  .tactical-table td {
+    @apply p-4er-t border-border text-foreground;
+  }
+
+  .tactical-table tr:hover {
+    @apply bg-secondary/50;
   }
 }
