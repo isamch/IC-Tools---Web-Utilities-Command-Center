@@ -44,24 +44,39 @@ export const RgbHexConverter: React.FC = () => {
   // Function to get current color for preview
   const getCurrentColor = () => {
     try {
-      const values = rgbInput.split(',').map(v => parseInt(v.trim()));
+      // Clean the input and split by comma
+      const cleanInput = rgbInput.replace(/\s/g, '');
+      const values = cleanInput.split(',').map(v => parseInt(v));
+      
+      // Check if we have exactly 3 valid numbers
       if (values.length === 3 && values.every(v => !isNaN(v) && v >= 0 && v <= 255)) {
-        return `rgb(${values[0]}, ${values[1]}, ${values[2]})`;
+        const color = `rgb(${values[0]}, ${values[1]}, ${values[2]})`;
+        console.log('Preview color:', color); // Debug log
+        return color;
       }
-    } catch {
-      // If parsing fails, return default red
+    } catch (error) {
+      console.log('Error parsing RGB:', error); // Debug log
     }
-    return 'rgb(255, 0, 0)'; // Default red color
+    
+    // Default red color if parsing fails
+    console.log('Using default red color'); // Debug log
+    return 'rgb(255, 0, 0)';
   };
+
+  const currentColor = getCurrentColor();
 
   return (
     <div className="space-y-6">
       <div className="text-center">
         <div 
-          className="w-32 rounded-xl border-4 border-border shadow-lg mx-auto mb-4"
-          style={{ backgroundColor: getCurrentColor() }}
+          className="w-32 rounded-xl border-4 border-border shadow-lg mx-auto mb-4 color-preview"
+          style={{ 
+            backgroundColor: currentColor,
+            minHeight:128        }}
         />
         <p className="text-sm text-muted-foreground">Preview Color</p>
+        <p className="text-xs text-muted-foreground mt-1">Current RGB: {rgbInput}</p>
+        <p className="text-xs text-muted-foreground">Applied Color: {currentColor}</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

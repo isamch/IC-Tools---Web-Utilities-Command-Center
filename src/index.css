@@ -180,6 +180,9 @@
   }
 
   .tactical-table tr:hover {
-    @apply bg-secondary/50;
+    @apply bg-secondary/50  /* Color preview styling */
+  .color-preview[object Object]
+    @apply w-32 h-32  background-color: var(--preview-color, rgb(2550,0)) !important;
   }
 }
+
