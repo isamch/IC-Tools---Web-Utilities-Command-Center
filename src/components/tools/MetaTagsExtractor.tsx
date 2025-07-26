@@ -18,19 +18,16 @@ export const MetaTagsExtractor: React.FC = () => {
       // Extract name attribute
       const nameMatch = attributes.match(/name\s*=\s*["']([^"']*)["']/i);
       if (nameMatch) tag.name = nameMatch[1];
-      
-      // Extract property attribute
+
       const propertyMatch = attributes.match(/property\s*=\s*["']([^"']*)["']/i);
       if (propertyMatch) tag.property = propertyMatch[1];
-      
-      // Extract http-equiv attribute
+
       const httpEquivMatch = attributes.match(/http-equiv\s*=\s*["']([^"']*)["']/i);
       if (httpEquivMatch) tag.httpEquiv = httpEquivMatch[1];
-      
-      // Extract content attribute
+
       const contentMatch = attributes.match(/content\s*=\s*["']([^"']*)["']/i);
       if (contentMatch) tag.content = contentMatch[1];
-      
+
       if (tag.name || tag.property || tag.httpEquiv) {
         matches.push(tag);
       }

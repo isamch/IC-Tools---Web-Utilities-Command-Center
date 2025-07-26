@@ -3,6 +3,15 @@ import React, { useEffect } from 'react';
 import { Activity, Shield, Clock } from 'lucide-react';
 import { Tool } from '../data/tools';
 
+interface ToolsContainerProps {
+  selectedTool: {
+    id: string;
+    name: string;
+    component: string;
+    icon: React.ComponentType<any>;
+  };
+}
+
 // Import all tool components
 import { ExtractLinks } from './tools/ExtractLinks';
 import { MergeLinks } from './tools/MergeLinks';
@@ -44,11 +53,6 @@ import { ExtractEmailDomains } from './tools/ExtractEmailDomains';
 import { GenerateFakeEmails } from './tools/GenerateFakeEmails';
 import { PasswordGenerator } from './tools/PasswordGenerator';
 import { FakeDataGenerator } from './tools/FakeDataGenerator';
-
-interface ToolsContainerProps {
-  selectedTool: Tool;
-  sidebarCollapsed: boolean;
-}
 
 const componentMap: { [key: string]: React.ComponentType } = {
   ExtractLinks,
@@ -93,39 +97,21 @@ const componentMap: { [key: string]: React.ComponentType } = {
   FakeDataGenerator,
 };
 
-export const ToolsContainer: React.FC<ToolsContainerProps> = ({
-  selectedTool,
-  sidebarCollapsed,
-}) => {
-  useEffect(() => {
-    // Track tool usage
-    if (selectedTool) {
-      const recentTools = JSON.parse(localStorage.getItem('recentTools') || '[]');
-      const existingIndex = recentTools.findIndex((tool: any) => tool.id === selectedTool.id);
-      
-      if (existingIndex >= 0) {
-        recentTools[existingIndex].lastUsed = new Date();
-        recentTools[existingIndex].usageCount += 1;
-      } else {
-        recentTools.unshift({
-          id: selectedTool.id,
-          name: selectedTool.name,
-          description: selectedTool.description,
-          lastUsed: new Date(),
-          usageCount: 1,
-        });
-      }
-      
-      // Keep only last 20 tools
-      recentTools.splice(20);
-      localStorage.setItem('recentTools', JSON.stringify(recentTools));
-
-      // Update stats
-      const stats = JSON.parse(localStorage.getItem('userStats') || '{"totalSessions": 0, "toolsUsed": 0, "timeActive": 0}');
-      stats.toolsUsed += 1;
-      localStorage.setItem('userStats', JSON.stringify(stats));
-    }
-  }, [selectedTool]);
+export const ToolsContainer: React.FC<ToolsContainerProps> = ({ selectedTool }) => {
+  const trackToolUsage = (toolId: string) => {
+    const recentTools = JSON.parse(localStorage.getItem('recentTools') || '[]');
+    const stats = JSON.parse(localStorage.getItem('toolStats') || '{}');
+    
+    const updatedRecent = [toolId, ...recentTools.filter(t => t !== toolId)].slice(0, 20);
+    
+    const updatedStats = {
+      ...stats,
+      [toolId]: (stats[toolId] || 0) + 1
+    };
+    
+    localStorage.setItem('recentTools', JSON.stringify(updatedRecent));
+    localStorage.setItem('toolStats', JSON.stringify(updatedStats));
+  };
 
   if (!selectedTool) return null;
 

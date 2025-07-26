@@ -41,25 +41,18 @@ export const RgbHexConverter: React.FC = () => {
     }
   };
 
-  // Function to get current color for preview
   const getCurrentColor = () => {
     try {
-      // Clean the input and split by comma
       const cleanInput = rgbInput.replace(/\s/g, '');
       const values = cleanInput.split(',').map(v => parseInt(v));
       
-      // Check if we have exactly 3 valid numbers
       if (values.length === 3 && values.every(v => !isNaN(v) && v >= 0 && v <= 255)) {
-        const color = `rgb(${values[0]}, ${values[1]}, ${values[2]})`;
-        console.log('Preview color:', color); // Debug log
-        return color;
+        return `rgb(${values[0]}, ${values[1]}, ${values[2]})`;
       }
     } catch (error) {
-      console.log('Error parsing RGB:', error); // Debug log
+      return 'rgb(255, 0, 0)';
     }
     
-    // Default red color if parsing fails
-    console.log('Using default red color'); // Debug log
     return 'rgb(255, 0, 0)';
   };
 

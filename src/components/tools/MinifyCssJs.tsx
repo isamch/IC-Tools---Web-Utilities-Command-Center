@@ -13,27 +13,25 @@ export const MinifyCssJs: React.FC = () => {
     let minified = input;
     
     if (type === 'css') {
-      // Basic CSS minification
       minified = input
-        .replace(/\/\*[\s\S]*?\*\//g, '') // Remove comments
-        .replace(/\s+/g, ' ') // Replace multiple whitespace with single space
-        .replace(/\s*{\s*/g, '{') // Remove spaces around opening braces
-        .replace(/\s*}\s*/g, '}') // Remove spaces around closing braces
-        .replace(/\s*:\s*/g, ':') // Remove spaces around colons
-        .replace(/\s*;\s*/g, ';') // Remove spaces around semicolons
-        .replace(/\s*,\s*/g, ',') // Remove spaces around commas
+        .replace(/\/\*[\s\S]*?\*\//g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/\s*{\s*/g, '{')
+        .replace(/\s*}\s*/g, '}')
+        .replace(/\s*:\s*/g, ':')
+        .replace(/\s*;\s*/g, ';')
+        .replace(/\s*,\s*/g, ',')
         .trim();
     } else {
-      // Basic JS minification
       minified = input
-        .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
-        .replace(/\/\/.*$/gm, '') // Remove single-line comments
-        .replace(/\s+/g, ' ') // Replace multiple whitespace with single space
-        .replace(/\s*{\s*/g, '{') // Remove spaces around opening braces
-        .replace(/\s*}\s*/g, '}') // Remove spaces around closing braces
-        .replace(/\s*;\s*/g, ';') // Remove spaces around semicolons
-        .replace(/\s*,\s*/g, ',') // Remove spaces around commas
-        .replace(/\s*=\s*/g, '=') // Remove spaces around equals
+        .replace(/\/\*[\s\S]*?\*\//g, '')
+        .replace(/\/\/.*$/gm, '')
+        .replace(/\s+/g, ' ')
+        .replace(/\s*{\s*/g, '{')
+        .replace(/\s*}\s*/g, '}')
+        .replace(/\s*;\s*/g, ';')
+        .replace(/\s*,\s*/g, ',')
+        .replace(/\s*=\s*/g, '=')
         .trim();
     }
     
